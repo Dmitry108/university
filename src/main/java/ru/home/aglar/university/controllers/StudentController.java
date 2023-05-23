@@ -20,13 +20,13 @@ public class StudentController {
     private final StudentValidator studentValidator;
 
     @GetMapping("/{id}")
-    public StudentDto getProductById(@PathVariable Long id) {
+    public StudentDto getStudentById(@PathVariable Long id) {
         return studentConverter.convertToDto(studentService.getStudentById(id).orElseThrow(() ->
                 new ResourceNotFoundException(String.format("Product with id = %d does not found", id))));
     }
 
     @GetMapping
-    public List<StudentDto> getAllProducts() {
+    public List<StudentDto> getAllStudents() {
         return studentService.getAllStudents().stream().map(studentConverter::convertToDto).toList();
     }
 
@@ -42,7 +42,7 @@ public class StudentController {
     }
 
     @PutMapping
-    public void updateProduct(@RequestBody StudentDto studentDto) {
+    public void updateStudent(@RequestBody StudentDto studentDto) {
         studentValidator.validate(studentDto);
         studentService.updateStudent(studentConverter.convertFromDto(studentDto));
     }
